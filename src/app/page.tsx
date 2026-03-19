@@ -67,7 +67,7 @@ function Header() {
             />
           </svg>
           <span className="text-[#0a0a0a] font-bold tracking-wide text-sm uppercase">
-            Altio
+            Alito
           </span>
         </a>
 
@@ -106,7 +106,34 @@ const heroHeadingLines = [
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-white overflow-hidden pt-16">
+    <section className="relative min-h-screen flex items-center bg-[#F8F9FA] overflow-hidden pt-16">
+      {/* Mountain silhouette background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1440 400"
+          fill="none"
+          preserveAspectRatio="none"
+          style={{ height: "60%" }}
+        >
+          <path
+            d="M0 400V280L120 200L240 260L360 160L480 220L600 120L720 180L840 80L960 160L1080 100L1200 180L1320 140L1440 200V400H0Z"
+            fill="#E4002B"
+            fillOpacity="0.06"
+          />
+          <path
+            d="M0 400V320L180 240L300 280L480 180L600 240L780 140L900 200L1080 120L1200 180L1380 160L1440 200V400H0Z"
+            fill="#E4002B"
+            fillOpacity="0.04"
+          />
+          <path
+            d="M0 400V350L240 300L420 320L600 260L780 300L960 240L1140 280L1320 260L1440 280V400H0Z"
+            fill="#E4002B"
+            fillOpacity="0.03"
+          />
+        </svg>
+      </div>
+
       {/* Grid pattern */}
       <div
         className="absolute inset-0"
@@ -114,12 +141,12 @@ function Hero() {
           backgroundImage: `linear-gradient(#e5e5e5 1px, transparent 1px),
                            linear-gradient(to right, #e5e5e5 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
-          opacity: 0.4,
+          opacity: 0.3,
         }}
       />
 
       {/* Fade edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,white_75%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#F8F9FA_75%)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center w-full">
         {/* Left — Title */}
@@ -165,12 +192,28 @@ function Hero() {
             ))}
           </h1>
 
+          {/* Swiss badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              delay: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+            className="mt-5"
+          >
+            <span className="inline-flex items-center gap-2 bg-white border border-[#E4002B]/20 text-[#E4002B] text-sm font-medium px-4 py-2 rounded-full shadow-sm">
+              🇨🇭 Basé en Suisse · Chavornay, VD
+            </span>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.6,
-              delay: 0.8,
+              delay: 0.9,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
             className="mt-6 text-base text-[#737373] max-w-md leading-[1.7]"
@@ -184,20 +227,20 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.6,
-              delay: 1.0,
+              delay: 1.1,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
             className="mt-8 flex gap-4"
           >
             <a
               href="#contact"
-              className="rounded-full bg-[#0a0a0a] text-white px-7 py-3 text-sm font-medium hover:bg-[#2563eb] transition-colors inline-flex items-center gap-2"
+              className="rounded-full bg-[#E4002B] text-white px-7 py-3 text-sm font-medium hover:bg-[#c50025] transition-colors inline-flex items-center gap-2"
             >
               Demander un devis <ArrowRight className="size-4" />
             </a>
             <a
               href="#services"
-              className="rounded-full border border-[#e5e5e5] text-[#0a0a0a] px-7 py-3 text-sm font-medium hover:border-[#d4d4d4] hover:bg-[#f5f5f4] transition-colors"
+              className="rounded-full border border-[#e5e5e5] text-[#0a0a0a] px-7 py-3 text-sm font-medium hover:border-[#d4d4d4] hover:bg-white transition-colors"
             >
               Découvrir
             </a>
@@ -220,7 +263,7 @@ function Hero() {
                 delay: 0.6 + i * 0.15,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
-              className="bg-[#f5f5f4] border border-[#e5e5e5] rounded-2xl px-8 py-6 max-w-xs w-full"
+              className="bg-white border border-[#e5e5e5] rounded-2xl px-8 py-6 max-w-xs w-full"
             >
               <div className="text-3xl font-bold text-[#0a0a0a]">
                 {stat.value}
@@ -751,8 +794,8 @@ function Contact() {
               {
                 icon: Mail,
                 label: "Email",
-                value: "theo@altio.swiss",
-                href: "mailto:theo@altio.swiss",
+                value: "theo@alito.swiss",
+                href: "mailto:theo@alito.swiss",
               },
               {
                 icon: MapPin,
@@ -839,7 +882,7 @@ function Footer() {
                 />
               </svg>
               <span className="text-white font-bold tracking-wide text-sm uppercase">
-                Altio
+                Alito
               </span>
             </div>
             <p className="text-[#737373] text-sm leading-relaxed">
@@ -891,10 +934,10 @@ function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="mailto:theo@altio.swiss"
+                  href="mailto:theo@alito.swiss"
                   className="text-[#737373] text-sm hover:text-white/80 transition-colors"
                 >
-                  theo@altio.swiss
+                  theo@alito.swiss
                 </a>
               </li>
               <li>
@@ -909,7 +952,7 @@ function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-[#737373] text-sm">
-            © 2025 Altio — Théo Hunziker. Tous droits réservés.
+            © 2025 Alito — Théo Hunziker. Tous droits réservés.
           </p>
           <div className="flex gap-6">
             <a

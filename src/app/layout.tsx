@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Altio — Théo Hunziker · Développeur Web Freelance",
+  title: "Alito — Théo Hunziker · Développeur Web Freelance",
   description:
     "Développeur web freelance basé à Chavornay, Suisse. Création de sites vitrines modernes, rapides et optimisés SEO.",
 };
