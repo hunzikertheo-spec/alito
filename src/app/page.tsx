@@ -22,6 +22,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { LampContainer } from "@/components/ui/lamp";
 
 /* ─────────────────── Helpers ─────────────────── */
 
@@ -98,182 +99,66 @@ function Header() {
 
 /* ─────────────────── Hero ─────────────────── */
 
-const heroHeadingLines = [
-  "Votre site web,",
-  "pensé local,",
-  "conçu pro.",
-];
-
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center bg-[#F8F9FA] overflow-hidden pt-16">
-      {/* Mountain silhouette background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg
-          className="absolute bottom-0 left-0 w-full"
-          viewBox="0 0 1440 400"
-          fill="none"
-          preserveAspectRatio="none"
-          style={{ height: "60%" }}
+    <LampContainer className="pt-16">
+      {/* Badge */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
+        className="mb-6"
+      >
+        <span className="inline-flex items-center gap-2 bg-slate-800/60 border border-cyan-500/30 text-cyan-300 text-sm font-medium px-4 py-1.5 rounded-full backdrop-blur-sm">
+          🇨🇭 Basé en Suisse · Chavornay
+        </span>
+      </motion.div>
+
+      {/* Heading */}
+      <motion.h1
+        initial={{ opacity: 0.5, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+        className="bg-gradient-to-br from-slate-100 to-slate-400 py-4 bg-clip-text text-center text-4xl font-bold tracking-tight text-transparent md:text-6xl lg:text-7xl leading-[1.1]"
+      >
+        On met votre business
+        <br />
+        en lumière.
+      </motion.h1>
+
+      {/* Subtitle */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.7, ease: "easeInOut" }}
+        className="mt-4 text-center text-slate-400 text-base md:text-lg max-w-xl leading-[1.75]"
+      >
+        Site web professionnel livré en 48h.
+        <br className="hidden sm:block" />
+        Sans les prix d&apos;agence.
+      </motion.p>
+
+      {/* CTA buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.65, duration: 0.7, ease: "easeInOut" }}
+        className="mt-10 flex flex-wrap items-center justify-center gap-4"
+      >
+        <a
+          href="#forfaits"
+          className="rounded-full bg-cyan-500 text-slate-950 px-7 py-3.5 text-sm font-semibold hover:bg-cyan-400 transition-colors inline-flex items-center gap-2"
         >
-          <path
-            d="M0 400V280L120 200L240 260L360 160L480 220L600 120L720 180L840 80L960 160L1080 100L1200 180L1320 140L1440 200V400H0Z"
-            fill="#E4002B"
-            fillOpacity="0.06"
-          />
-          <path
-            d="M0 400V320L180 240L300 280L480 180L600 240L780 140L900 200L1080 120L1200 180L1380 160L1440 200V400H0Z"
-            fill="#E4002B"
-            fillOpacity="0.04"
-          />
-          <path
-            d="M0 400V350L240 300L420 320L600 260L780 300L960 240L1140 280L1320 260L1440 280V400H0Z"
-            fill="#E4002B"
-            fillOpacity="0.03"
-          />
-        </svg>
-      </div>
-
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(#e5e5e5 1px, transparent 1px),
-                           linear-gradient(to right, #e5e5e5 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-          opacity: 0.3,
-        }}
-      />
-
-      {/* Fade edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#F8F9FA_75%)]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center w-full">
-        {/* Left — Title */}
-        <div className="min-w-0">
-          <motion.div
-            initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mb-6 flex flex-wrap items-center gap-4"
-          >
-            <span className="text-[#a3a3a3] font-medium text-[11px] tracking-[0.1em] uppercase">
-              Développeur Web Freelance
-            </span>
-            <span className="inline-flex items-center gap-2 bg-[#eff6ff] text-[#2563eb] text-xs font-medium px-3 py-1 rounded-full">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-green-500" />
-              </span>
-              Disponible pour de nouveaux projets
-            </span>
-          </motion.div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]">
-            {heroHeadingLines.map((line, i) => (
-              <span
-                key={i}
-                className="block"
-                style={{ clipPath: "inset(0 -100% 0 -100%)" }}
-              >
-                <motion.span
-                  className="block"
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.3 + i * 0.12,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-
-          {/* Swiss badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.7,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="mt-5"
-          >
-            <span className="inline-flex items-center gap-2 bg-white border border-[#E4002B]/20 text-[#E4002B] text-sm font-medium px-4 py-2 rounded-full shadow-sm">
-              🇨🇭 Basé en Suisse · Chavornay, VD
-            </span>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.9,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="mt-6 text-base text-[#737373] max-w-md leading-[1.7]"
-          >
-            Sites vitrines modernes, rapides et optimisés pour les
-            entreprises de Suisse romande.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 1.1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            className="mt-8 flex gap-4"
-          >
-            <a
-              href="#contact"
-              className="rounded-full bg-[#E4002B] text-white px-7 py-3 text-sm font-medium hover:bg-[#c50025] transition-colors inline-flex items-center gap-2"
-            >
-              Demander un devis <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="#services"
-              className="rounded-full border border-[#e5e5e5] text-[#0a0a0a] px-7 py-3 text-sm font-medium hover:border-[#d4d4d4] hover:bg-white transition-colors"
-            >
-              Découvrir
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Right — Stats */}
-        <div className="flex flex-col gap-5 lg:items-end">
-          {[
-            { value: "48h", label: "Délai de réponse" },
-            { value: "Suisse", label: "Basé en Suisse" },
-            { value: "Chavornay", label: "Canton de Vaud" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.7,
-                delay: 0.6 + i * 0.15,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className="bg-white border border-[#e5e5e5] rounded-2xl px-8 py-6 max-w-xs w-full"
-            >
-              <div className="text-3xl font-bold text-[#0a0a0a]">
-                {stat.value}
-              </div>
-              <div className="text-sm text-[#a3a3a3] mt-1">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+          Voir nos forfaits <ArrowRight className="size-4" />
+        </a>
+        <a
+          href="#services"
+          className="rounded-full border border-slate-600 text-slate-300 px-7 py-3.5 text-sm font-semibold hover:border-slate-400 hover:text-white transition-colors"
+        >
+          Voir nos réalisations
+        </a>
+      </motion.div>
+    </LampContainer>
   );
 }
 
