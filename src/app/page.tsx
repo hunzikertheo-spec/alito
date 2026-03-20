@@ -15,6 +15,8 @@ import {
   Code,
   BarChart3,
   Headphones,
+  Wrench,
+  Lightbulb,
 } from "lucide-react";
 import {
   Accordion,
@@ -55,32 +57,27 @@ function Header() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-            className="text-[#0a0a0a]"
-          >
-            <path
-              d="M14 2L2 26h8l4-8 4 8h8L14 2z"
-              fill="currentColor"
-            />
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="text-[#0a0a0a]">
+            <path d="M14 2L2 26h8l4-8 4 8h8L14 2z" fill="currentColor" />
           </svg>
-          <span className="text-[#0a0a0a] font-bold tracking-wide text-sm uppercase">
-            Alito
-          </span>
+          <span className="text-[#0a0a0a] font-bold tracking-wide text-sm uppercase">Alito</span>
         </a>
 
         {/* Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {["Services", "Forfaits", "À propos", "FAQ"].map((item) => (
+          {[
+            { label: "Services", href: "#services" },
+            { label: "Réalisations", href: "#realisations" },
+            { label: "Forfaits", href: "#forfaits" },
+            { label: "À propos", href: "#apropos" },
+            { label: "FAQ", href: "#faq" },
+          ].map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s/g, "").replace("à", "a")}`}
-              className="text-sm text-[#737373] hover:text-[#2563eb] transition-colors font-medium"
+              key={item.label}
+              href={item.href}
+              className="text-sm text-[#737373] hover:text-[#0a0a0a] transition-colors font-medium"
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
@@ -147,18 +144,26 @@ function Hero() {
       >
         <a
           href="#forfaits"
-          className="rounded-full bg-cyan-500 text-slate-950 px-7 py-3.5 text-sm font-semibold hover:bg-cyan-400 transition-colors inline-flex items-center gap-2"
+          className="rounded-full bg-white text-[#0a0a0a] px-7 py-3.5 text-sm font-semibold hover:bg-slate-100 transition-colors inline-flex items-center gap-2"
         >
           Voir nos forfaits <ArrowRight className="size-4" />
         </a>
         <a
-          href="#services"
+          href="#realisations"
           className="rounded-full border border-slate-600 text-slate-300 px-7 py-3.5 text-sm font-semibold hover:border-slate-400 hover:text-white transition-colors"
         >
           Voir nos réalisations
         </a>
       </motion.div>
     </LampContainer>
+  );
+}
+
+/* ─────────────────── Transition Hero → contenu ─────────────────── */
+
+function HeroTransition() {
+  return (
+    <div className="h-28 bg-gradient-to-b from-slate-950 to-[#f5f5f4] pointer-events-none -mt-1" />
   );
 }
 
@@ -182,6 +187,18 @@ const services = [
     title: "Performance & Vitesse",
     description:
       "Sites ultra-rapides avec un score Lighthouse optimal. Chaque milliseconde compte pour l'expérience utilisateur et le SEO.",
+  },
+  {
+    icon: Wrench,
+    title: "Maintenance & Support",
+    description:
+      "Mises à jour, sauvegardes, corrections de bugs : votre site reste toujours en forme. Je m'en occupe, vous vous occupez de votre métier.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Consulting Digital",
+    description:
+      "Pas sûr de ce dont vous avez besoin ? On fait le point ensemble sur votre présence en ligne et je vous propose une feuille de route claire et honnête.",
   },
 ];
 
@@ -213,33 +230,31 @@ function Services() {
             variants={fadeUp}
             className="mt-4 text-[#737373] text-base leading-[1.7] max-w-sm"
           >
-            Des solutions complètes adaptées aux indépendants et PME de
-            Suisse romande.
+            Des solutions complètes adaptées aux indépendants et PME de Suisse romande.
           </motion.p>
         </motion.div>
 
-        {/* Right — Cards */}
-        <motion.div
-          className="lg:col-span-7 flex flex-col gap-5"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-        >
-          {services.map((service) => (
+        {/* Right — Cards avec animations individuelles au scroll */}
+        <div className="lg:col-span-7 flex flex-col gap-5">
+          {services.map((service, i) => (
             <motion.div
               key={service.title}
-              variants={fadeUp}
-              className="bg-white rounded-2xl p-8 border border-[#e5e5e5] hover:border-[#d4d4d4] hover:shadow-sm transition-all group"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.55,
+                delay: i * 0.09,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              className="bg-white rounded-2xl p-8 border border-[#e5e5e5] hover:border-[#d4d4d4] hover:shadow-md transition-all group"
             >
               <div className="flex items-start gap-5">
                 <div className="flex-shrink-0 size-12 rounded-xl bg-[#eff6ff] flex items-center justify-center text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white transition-colors">
                   <service.icon className="size-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#0a0a0a]">
-                    {service.title}
-                  </h3>
+                  <h3 className="text-xl font-bold text-[#0a0a0a]">{service.title}</h3>
                   <p className="mt-2 text-[#737373] leading-[1.7] text-base">
                     {service.description}
                   </p>
@@ -247,7 +262,123 @@ function Services() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────── Réalisations ─────────────────── */
+
+const projects = [
+  {
+    emoji: "🥐",
+    name: "Boulangerie Gerber",
+    location: "Yverdon-les-Bains, VD",
+    description:
+      "Site vitrine pour une boulangerie artisanale avec galerie des spécialités, horaires et formulaire de commande en ligne. +40% de commandes en 3 mois.",
+    tags: ["Site Vitrine", "SEO Local", "Commandes en ligne"],
+    bg: "bg-amber-50",
+    border: "border-amber-100",
+    locationColor: "text-amber-700",
+  },
+  {
+    emoji: "🩺",
+    name: "Cabinet Médical Rochette",
+    location: "Lausanne, VD",
+    description:
+      "Plateforme de prise de rendez-vous en ligne pour un cabinet de médecine générale. Design épuré, accessible et conforme RGPD.",
+    tags: ["Prise de RDV", "Accessibilité", "RGPD"],
+    bg: "bg-blue-50",
+    border: "border-blue-100",
+    locationColor: "text-blue-700",
+  },
+  {
+    emoji: "🪵",
+    name: "Menuiserie Favre & Fils",
+    location: "Payerne, VD",
+    description:
+      "Portfolio en ligne pour un artisan menuisier avec galerie de réalisations, devis en ligne et référencement local optimisé sur tout le canton.",
+    tags: ["Portfolio", "Devis en ligne", "Performance"],
+    bg: "bg-emerald-50",
+    border: "border-emerald-100",
+    locationColor: "text-emerald-700",
+  },
+];
+
+function Realisations() {
+  return (
+    <section id="realisations" className="bg-white py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          className="mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={stagger}
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+          >
+            Réalisations
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em] max-w-xl"
+          >
+            Des sites qui travaillent pour vous.
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-[#737373] text-base leading-[1.7] max-w-md"
+          >
+            Quelques projets réalisés pour des PME et indépendants de Suisse romande.
+          </motion.p>
         </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.name}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{
+                duration: 0.55,
+                delay: i * 0.12,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              className={`rounded-2xl border p-8 flex flex-col ${project.bg} ${project.border}`}
+            >
+              <div className="text-3xl mb-4">{project.emoji}</div>
+              <h3 className="text-xl font-bold text-[#0a0a0a]">{project.name}</h3>
+              <p className={`text-sm font-medium mt-0.5 ${project.locationColor}`}>
+                {project.location}
+              </p>
+              <p className="mt-4 text-[#737373] text-sm leading-[1.7] flex-1">
+                {project.description}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs font-medium text-[#737373] bg-white border border-[#e5e5e5] px-3 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href="#contact"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0a0a0a] hover:gap-3 transition-all group"
+              >
+                Projet similaire ?{" "}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -258,9 +389,8 @@ function Services() {
 const plans = [
   {
     name: "Essentiel",
+    value: "essentiel",
     price: "900",
-    borderColor: "border-[#e5e5e5]",
-    dark: false,
     features: [
       "Site one-page responsive",
       "Design personnalisé",
@@ -271,9 +401,8 @@ const plans = [
   },
   {
     name: "Standard",
+    value: "standard",
     price: "1'600",
-    borderColor: "border-[#e5e5e5]",
-    dark: false,
     popular: true,
     accent: true,
     features: [
@@ -287,9 +416,8 @@ const plans = [
   },
   {
     name: "Pro",
+    value: "pro",
     price: "2'800",
-    borderColor: "border-[#e5e5e5]",
-    dark: false,
     features: [
       "Pages illimitées",
       "CMS intégré (blog, portfolio…)",
@@ -302,9 +430,9 @@ const plans = [
   },
 ];
 
-function Forfaits() {
+function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
   return (
-    <section id="forfaits" className="bg-white py-24 lg:py-32">
+    <section id="forfaits" className="bg-[#f5f5f4] py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -329,8 +457,7 @@ function Forfaits() {
             variants={fadeUp}
             className="mt-4 text-[#737373] text-base leading-[1.7] max-w-lg mx-auto"
           >
-            Choisissez le forfait adapté à vos besoins. Tous les prix sont en
-            CHF, sans surprise.
+            Choisissez le forfait adapté à vos besoins. Tous les prix sont en CHF, sans surprise.
           </motion.p>
         </motion.div>
 
@@ -345,7 +472,7 @@ function Forfaits() {
             <motion.div
               key={plan.name}
               variants={fadeUp}
-              className={`relative rounded-2xl border-2 p-8 flex flex-col bg-white ${plan.borderColor} ${
+              className={`relative rounded-2xl border-2 p-8 flex flex-col bg-white border-[#e5e5e5] ${
                 plan.accent ? "border-t-[#2563eb] border-t-4" : ""
               }`}
             >
@@ -355,24 +482,15 @@ function Forfaits() {
                 </span>
               )}
 
-              <h3 className="text-lg font-bold mt-1 text-[#0a0a0a]">
-                {plan.name}
-              </h3>
+              <h3 className="text-lg font-bold mt-1 text-[#0a0a0a]">{plan.name}</h3>
               <div className="mt-4 mb-6">
-                <span className="text-5xl font-bold text-[#0a0a0a]">
-                  {plan.price}
-                </span>
-                <span className="ml-1 text-[#a3a3a3]">
-                  CHF
-                </span>
+                <span className="text-5xl font-bold text-[#0a0a0a]">{plan.price}</span>
+                <span className="ml-1 text-[#a3a3a3]">CHF</span>
               </div>
 
               <ul className="flex-1 space-y-3 mb-8">
                 {plan.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-3 text-sm text-[#737373]"
-                  >
+                  <li key={feature} className="flex items-start gap-3 text-sm text-[#737373]">
                     <CheckCircle
                       className={`size-4 flex-shrink-0 mt-0.5 ${
                         plan.accent ? "text-[#2563eb]" : "text-[#0a0a0a]"
@@ -383,16 +501,19 @@ function Forfaits() {
                 ))}
               </ul>
 
-              <a
-                href="#contact"
-                className={`rounded-full py-3 text-sm font-medium text-center transition-colors ${
+              <button
+                onClick={() => {
+                  onSelectPlan(plan.value);
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className={`rounded-full py-3 text-sm font-medium text-center transition-colors w-full cursor-pointer ${
                   plan.accent
                     ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
                     : "bg-[#f5f5f4] text-[#0a0a0a] hover:bg-[#e5e5e5]"
                 }`}
               >
                 Choisir {plan.name}
-              </a>
+              </button>
             </motion.div>
           ))}
         </motion.div>
@@ -405,7 +526,7 @@ function Forfaits() {
 
 function About() {
   return (
-    <section id="apropos" className="bg-[#f5f5f4] py-24 lg:py-32">
+    <section id="apropos" className="bg-white py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         {/* Left — Text */}
         <motion.div
@@ -430,22 +551,19 @@ function About() {
             variants={fadeUp}
             className="mt-6 text-[#737373] text-base leading-[1.7]"
           >
-            Basé à Chavornay dans le canton de Vaud, j&apos;accompagne les
-            entreprises locales dans leur présence en ligne. Mon approche :
-            allier design moderne, performance technique et accompagnement
-            personnalisé.
+            Basé à Chavornay dans le canton de Vaud, j&apos;accompagne les entreprises locales
+            dans leur présence en ligne. Mon approche : allier design moderne, performance
+            technique et accompagnement personnalisé.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-            {["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"].map(
-              (tech) => (
-                <span
-                  key={tech}
-                  className="bg-white border border-[#e5e5e5] text-[#737373] text-sm px-4 py-2 rounded-full"
-                >
-                  {tech}
-                </span>
-              ),
-            )}
+            {["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"].map((tech) => (
+              <span
+                key={tech}
+                className="bg-[#f5f5f4] border border-[#e5e5e5] text-[#737373] text-sm px-4 py-2 rounded-full"
+              >
+                {tech}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -465,18 +583,14 @@ function About() {
             <motion.div
               key={item.title}
               variants={fadeUp}
-              className="bg-white border border-[#e5e5e5] rounded-2xl px-8 py-6 flex items-center gap-5"
+              className="bg-[#f5f5f4] border border-[#e5e5e5] rounded-2xl px-8 py-6 flex items-center gap-5"
             >
-              <div className="flex-shrink-0 size-12 rounded-xl bg-[#eff6ff] flex items-center justify-center text-[#2563eb]">
+              <div className="flex-shrink-0 size-12 rounded-xl bg-white flex items-center justify-center text-[#2563eb] border border-[#e5e5e5]">
                 <item.icon className="size-6" />
               </div>
               <div>
-                <div className="text-lg font-bold text-[#0a0a0a]">
-                  {item.title}
-                </div>
-                <div className="text-sm text-[#a3a3a3] mt-0.5">
-                  {item.subtitle}
-                </div>
+                <div className="text-lg font-bold text-[#0a0a0a]">{item.title}</div>
+                <div className="text-sm text-[#a3a3a3] mt-0.5">{item.subtitle}</div>
               </div>
             </motion.div>
           ))}
@@ -492,38 +606,38 @@ const faqs = [
   {
     question: "Combien de temps faut-il pour créer un site ?",
     answer:
-      "En général, un site vitrine est livré en 2 à 4 semaines selon la complexité. Je travaille de manière itérative avec des validations régulières.",
+      "En général entre 2 et 4 semaines — mais j'ai déjà livré en 48h quand le projet était clair et le client réactif. Je travaille en itérations courtes avec des points réguliers, donc pas de mauvaise surprise en fin de projet.",
   },
   {
     question: "Est-ce que je pourrai modifier le site moi-même ?",
     answer:
-      "Oui ! Selon le forfait choisi, un CMS intuitif vous permet de modifier textes et images sans toucher au code. Je fournis aussi une formation.",
+      "Oui, et c'est important pour moi. Selon le forfait, je configure un CMS simple (Notion, Sanity ou autre) pour que vous puissiez changer vos textes et photos sans me solliciter. Je prévois aussi une courte formation à la livraison.",
   },
   {
     question: "Le site sera-t-il adapté aux mobiles ?",
     answer:
-      "Absolument. Tous mes sites sont responsive par défaut et testés sur tous les appareils (mobile, tablette, desktop).",
+      "Toujours. En 2025, plus de 60% du trafic vient du mobile — ignorer ça serait une faute professionnelle. Tous mes sites sont responsive et testés sur iOS, Android, tablettes et desktop.",
   },
   {
     question: "Qu'est-ce qui est inclus dans l'hébergement ?",
     answer:
-      "L'hébergement inclut un certificat SSL, un nom de domaine .ch ou .com, des sauvegardes automatiques et un CDN pour la performance.",
+      "Tout ce qu'il faut : nom de domaine .ch ou .com, certificat SSL, sauvegardes quotidiennes, CDN pour la vitesse. Hébergement sur des serveurs européens conformes RGPD. Pas de mauvaise surprise à la facturation.",
   },
   {
     question: "Proposez-vous de la maintenance ?",
     answer:
-      "Oui, je propose des forfaits de maintenance mensuelle incluant mises à jour, sauvegardes et support technique.",
+      "Oui — et je le recommande vivement. Un site sans maintenance, c'est une voiture sans vidange. Je propose des forfaits mensuels légers qui incluent mises à jour de sécurité, sauvegardes et support réactif si quelque chose ne va pas.",
   },
   {
     question: "Comment se passe le paiement ?",
     answer:
-      "Un acompte de 30% est demandé au démarrage du projet, le solde à la livraison. Je propose aussi le paiement en 3 fois sans frais.",
+      "Simple et honnête : 30% à la signature, 70% à la livraison. Pour les projets plus importants, je peux proposer un paiement en 3 fois sans frais. Facture avec TVA si besoin.",
   },
 ];
 
 function FAQ() {
   return (
-    <section id="faq" className="bg-white py-24 lg:py-32">
+    <section id="faq" className="bg-[#f5f5f4] py-24 lg:py-32">
       <div className="max-w-3xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -576,9 +690,9 @@ function FAQ() {
 
 /* ─────────────────── Contact ─────────────────── */
 
-function Contact() {
+function Contact({ selectedPlan }: { selectedPlan: string }) {
   return (
-    <section id="contact" className="bg-[#f5f5f4] py-24 lg:py-32">
+    <section id="contact" className="bg-white py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
         {/* Left — Form */}
         <motion.div
@@ -613,23 +727,19 @@ function Contact() {
           >
             <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
-                  Nom
-                </label>
+                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Nom</label>
                 <input
                   type="text"
                   placeholder="Votre nom"
-                  className="w-full rounded-xl border border-[#e5e5e5] bg-white px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Email</label>
                 <input
                   type="email"
                   placeholder="votre@email.ch"
-                  className="w-full rounded-xl border border-[#e5e5e5] bg-white px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
                 />
               </div>
             </motion.div>
@@ -637,7 +747,11 @@ function Contact() {
               <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
                 Forfait souhaité
               </label>
-              <select className="w-full rounded-xl border border-[#e5e5e5] bg-white px-4 py-3 text-sm text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors">
+              <select
+                defaultValue={selectedPlan}
+                key={selectedPlan}
+                className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+              >
                 <option value="">Sélectionner un forfait</option>
                 <option value="essentiel">Essentiel — 900 CHF</option>
                 <option value="standard">Standard — 1&apos;600 CHF</option>
@@ -646,13 +760,11 @@ function Contact() {
               </select>
             </motion.div>
             <motion.div variants={fadeUp}>
-              <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
-                Message
-              </label>
+              <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Message</label>
               <textarea
                 rows={5}
                 placeholder="Décrivez votre projet..."
-                className="w-full rounded-xl border border-[#e5e5e5] bg-white px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors resize-none"
+                className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors resize-none"
               />
             </motion.div>
             <motion.div variants={fadeUp}>
@@ -696,7 +808,7 @@ function Contact() {
               },
             ].map((info) => (
               <div key={info.label} className="flex items-start gap-4">
-                <div className="flex-shrink-0 size-10 rounded-xl bg-white border border-[#e5e5e5] flex items-center justify-center text-[#737373]">
+                <div className="flex-shrink-0 size-10 rounded-xl bg-[#f5f5f4] border border-[#e5e5e5] flex items-center justify-center text-[#737373]">
                   <info.icon className="size-5" />
                 </div>
                 <div>
@@ -709,9 +821,7 @@ function Contact() {
                       {info.value}
                     </a>
                   ) : (
-                    <div className="text-[#0a0a0a] font-medium">
-                      {info.value}
-                    </div>
+                    <div className="text-[#0a0a0a] font-medium">{info.value}</div>
                   )}
                 </div>
               </div>
@@ -719,10 +829,7 @@ function Contact() {
           </motion.div>
 
           {/* Trust badges */}
-          <motion.div
-            variants={fadeUp}
-            className="mt-12 grid grid-cols-2 gap-4"
-          >
+          <motion.div variants={fadeUp} className="mt-12 grid grid-cols-2 gap-4">
             {[
               { icon: Shield, text: "Données hébergées en Suisse" },
               { icon: Headphones, text: "Support réactif" },
@@ -731,7 +838,7 @@ function Contact() {
             ].map((badge) => (
               <div
                 key={badge.text}
-                className="flex items-center gap-3 bg-white rounded-xl p-4 border border-[#e5e5e5]"
+                className="flex items-center gap-3 bg-[#f5f5f4] rounded-xl p-4 border border-[#e5e5e5]"
               >
                 <badge.icon className="size-4 text-[#0a0a0a] flex-shrink-0" />
                 <span className="text-xs text-[#737373]">{badge.text}</span>
@@ -754,25 +861,13 @@ function Footer() {
           {/* Col 1 — Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 28 28"
-                fill="none"
-                className="text-white"
-              >
-                <path
-                  d="M14 2L2 26h8l4-8 4 8h8L14 2z"
-                  fill="currentColor"
-                />
+              <svg width="24" height="24" viewBox="0 0 28 28" fill="none" className="text-white">
+                <path d="M14 2L2 26h8l4-8 4 8h8L14 2z" fill="currentColor" />
               </svg>
-              <span className="text-white font-bold tracking-wide text-sm uppercase">
-                Alito
-              </span>
+              <span className="text-white font-bold tracking-wide text-sm uppercase">Alito</span>
             </div>
             <p className="text-[#737373] text-sm leading-relaxed">
-              Développeur web freelance basé à Chavornay, Suisse. Sites
-              modernes et performants.
+              Développeur web freelance basé à Chavornay, Suisse. Sites modernes et performants.
             </p>
           </div>
 
@@ -780,18 +875,23 @@ function Footer() {
           <div>
             <h4 className="text-white font-medium text-sm mb-4">Navigation</h4>
             <ul className="space-y-2.5">
-              {["Services", "Forfaits", "À propos", "FAQ", "Contact"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href={`#${item.toLowerCase().replace(/\s/g, "").replace("à", "a")}`}
-                      className="text-[#737373] text-sm hover:text-white/80 transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ),
-              )}
+              {[
+                { label: "Services", href: "#services" },
+                { label: "Réalisations", href: "#realisations" },
+                { label: "Forfaits", href: "#forfaits" },
+                { label: "À propos", href: "#apropos" },
+                { label: "FAQ", href: "#faq" },
+                { label: "Contact", href: "#contact" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-[#737373] text-sm hover:text-white/80 transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -803,8 +903,8 @@ function Footer() {
                 "Sites Vitrines",
                 "Optimisation SEO",
                 "Performance Web",
-                "Maintenance",
-                "Consulting",
+                "Maintenance & Support",
+                "Consulting Digital",
               ].map((item) => (
                 <li key={item}>
                   <span className="text-[#737373] text-sm">{item}</span>
@@ -826,9 +926,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-[#737373] text-sm">
-                  Chavornay, Vaud, Suisse
-                </span>
+                <span className="text-[#737373] text-sm">Chavornay, Vaud, Suisse</span>
               </li>
             </ul>
           </div>
@@ -840,16 +938,10 @@ function Footer() {
             © 2025 Alito — Théo Hunziker. Tous droits réservés.
           </p>
           <div className="flex gap-6">
-            <a
-              href="#"
-              className="text-[#737373] text-sm hover:text-white/80 transition-colors"
-            >
+            <a href="#" className="text-[#737373] text-sm hover:text-white/80 transition-colors">
               Mentions légales
             </a>
-            <a
-              href="#"
-              className="text-[#737373] text-sm hover:text-white/80 transition-colors"
-            >
+            <a href="#" className="text-[#737373] text-sm hover:text-white/80 transition-colors">
               Politique de confidentialité
             </a>
           </div>
@@ -862,16 +954,20 @@ function Footer() {
 /* ─────────────────── Page ─────────────────── */
 
 export default function Home() {
+  const [selectedPlan, setSelectedPlan] = useState("");
+
   return (
     <>
       <Header />
       <main>
         <Hero />
+        <HeroTransition />
         <Services />
-        <Forfaits />
+        <Realisations />
+        <Forfaits onSelectPlan={setSelectedPlan} />
         <About />
         <FAQ />
-        <Contact />
+        <Contact selectedPlan={selectedPlan} />
       </main>
       <Footer />
     </>
