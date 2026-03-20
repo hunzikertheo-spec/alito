@@ -67,7 +67,7 @@ function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {[
             { label: "Services", href: "#services" },
-            { label: "Réalisations", href: "#realisations" },
+            { label: "Lancement", href: "#tarif-lancement" },
             { label: "Forfaits", href: "#forfaits" },
             { label: "À propos", href: "#apropos" },
             { label: "FAQ", href: "#faq" },
@@ -149,10 +149,10 @@ function Hero() {
           Voir nos forfaits <ArrowRight className="size-4" />
         </a>
         <a
-          href="#realisations"
+          href="#tarif-lancement"
           className="rounded-full border border-slate-600 text-slate-300 px-7 py-3.5 text-sm font-semibold hover:border-slate-400 hover:text-white transition-colors"
         >
-          Voir nos réalisations
+          Voir l&apos;offre de lancement
         </a>
       </motion.div>
     </LampContainer>
@@ -268,117 +268,136 @@ function Services() {
   );
 }
 
-/* ─────────────────── Réalisations ─────────────────── */
+/* ─────────────────── Tarif de lancement ─────────────────── */
 
-const projects = [
-  {
-    emoji: "🥐",
-    name: "Boulangerie Gerber",
-    location: "Yverdon-les-Bains, VD",
-    description:
-      "Site vitrine pour une boulangerie artisanale avec galerie des spécialités, horaires et formulaire de commande en ligne. +40% de commandes en 3 mois.",
-    tags: ["Site Vitrine", "SEO Local", "Commandes en ligne"],
-    bg: "bg-amber-50",
-    border: "border-amber-100",
-    locationColor: "text-amber-700",
-  },
-  {
-    emoji: "🩺",
-    name: "Cabinet Médical Rochette",
-    location: "Lausanne, VD",
-    description:
-      "Plateforme de prise de rendez-vous en ligne pour un cabinet de médecine générale. Design épuré, accessible et conforme RGPD.",
-    tags: ["Prise de RDV", "Accessibilité", "RGPD"],
-    bg: "bg-blue-50",
-    border: "border-blue-100",
-    locationColor: "text-blue-700",
-  },
-  {
-    emoji: "🪵",
-    name: "Menuiserie Favre & Fils",
-    location: "Payerne, VD",
-    description:
-      "Portfolio en ligne pour un artisan menuisier avec galerie de réalisations, devis en ligne et référencement local optimisé sur tout le canton.",
-    tags: ["Portfolio", "Devis en ligne", "Performance"],
-    bg: "bg-emerald-50",
-    border: "border-emerald-100",
-    locationColor: "text-emerald-700",
-  },
+const launchFeatures = [
+  "Site one-page responsive",
+  "Design personnalisé",
+  "Formulaire de contact",
+  "Optimisation SEO de base",
+  "Hébergement 1 an inclus",
 ];
 
-function Realisations() {
+const PLACES_TOTAL = 3;
+const PLACES_LEFT = 2;
+
+function TarifLancement({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
   return (
-    <section id="realisations" className="bg-white py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      id="tarif-lancement"
+      className="py-24 lg:py-32 bg-gradient-to-br from-amber-50 via-white to-orange-50 relative overflow-hidden"
+    >
+      {/* Subtle texture rings */}
+      <div className="absolute -top-32 -right-32 size-96 rounded-full bg-amber-100/40 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 size-72 rounded-full bg-orange-100/30 blur-3xl pointer-events-none" />
+
+      <div className="relative max-w-4xl mx-auto px-6">
+        {/* Header */}
         <motion.div
-          className="mb-16"
+          className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
         >
-          <motion.p
-            variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
-          >
-            Réalisations
-          </motion.p>
+          <motion.div variants={fadeUp} className="mb-5">
+            <span className="inline-flex items-center gap-2 bg-amber-100 border border-amber-200 text-amber-800 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-[0.08em]">
+              ⚡ Offre de lancement — places limitées
+            </span>
+          </motion.div>
+
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em] max-w-xl"
+            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
           >
-            Des sites qui travaillent pour vous.
+            Je cherche mes 3 premiers clients.
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mt-4 text-[#737373] text-base leading-[1.7] max-w-md"
+            className="mt-4 text-[#737373] text-base leading-[1.7] max-w-xl mx-auto"
           >
-            Quelques projets réalisés pour des PME et indépendants de Suisse romande.
+            Pour lancer Alito, je propose un tarif exceptionnel aux 3 premières PME qui me font confiance.
           </motion.p>
+
+          {/* Places counter */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 inline-flex flex-col items-center gap-3"
+          >
+            <div className="flex items-center gap-2.5">
+              {Array.from({ length: PLACES_TOTAL }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`size-4 rounded-full border-2 transition-colors ${
+                    i < PLACES_TOTAL - PLACES_LEFT
+                      ? "bg-[#0a0a0a] border-[#0a0a0a]"
+                      : "bg-white border-[#d4d4d4]"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="text-sm font-semibold text-[#0a0a0a]">
+              <span className="text-amber-600">{PLACES_LEFT} places restantes</span> sur {PLACES_TOTAL}
+            </p>
+          </motion.div>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.55,
-                delay: i * 0.12,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className={`rounded-2xl border p-8 flex flex-col ${project.bg} ${project.border}`}
-            >
-              <div className="text-3xl mb-4">{project.emoji}</div>
-              <h3 className="text-xl font-bold text-[#0a0a0a]">{project.name}</h3>
-              <p className={`text-sm font-medium mt-0.5 ${project.locationColor}`}>
-                {project.location}
+        {/* Featured card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="bg-white rounded-3xl border border-amber-200 shadow-xl shadow-amber-100/50 p-8 md:p-12 max-w-2xl mx-auto"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+            <div>
+              <p className="text-[11px] font-semibold text-amber-600 uppercase tracking-[0.1em] mb-2">
+                Site vitrine complet
               </p>
-              <p className="mt-4 text-[#737373] text-sm leading-[1.7] flex-1">
-                {project.description}
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-medium text-[#737373] bg-white border border-[#e5e5e5] px-3 py-1 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="flex items-end gap-3">
+                <span className="text-6xl font-bold text-[#0a0a0a] tracking-[-0.03em]">650</span>
+                <div className="mb-2">
+                  <span className="text-xl text-[#a3a3a3] font-medium">CHF</span>
+                  <p className="text-sm text-[#a3a3a3] line-through leading-none mt-0.5">900 CHF</p>
+                </div>
               </div>
-              <a
-                href="#contact"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0a0a0a] hover:gap-3 transition-all group"
-              >
-                Projet similaire ?{" "}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </motion.div>
-          ))}
-        </div>
+              <p className="mt-1 text-sm text-[#737373]">Paiement en 2 fois sans frais possible</p>
+            </div>
+
+            <span className="self-start sm:self-center inline-flex items-center bg-amber-100 text-amber-700 text-sm font-bold px-4 py-2 rounded-full shrink-0">
+              −28%
+            </span>
+          </div>
+
+          {/* Divider */}
+          <div className="my-8 border-t border-[#f0f0f0]" />
+
+          {/* Features */}
+          <ul className="grid sm:grid-cols-2 gap-3 mb-10">
+            {launchFeatures.map((feature) => (
+              <li key={feature} className="flex items-center gap-3 text-sm text-[#737373]">
+                <CheckCircle className="size-4 text-amber-500 flex-shrink-0" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA */}
+          <button
+            onClick={() => {
+              onSelectPlan("essentiel");
+              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="w-full rounded-full bg-[#0a0a0a] text-white py-4 text-sm font-semibold hover:bg-[#262626] transition-colors inline-flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Je veux ce tarif de lancement <ArrowRight className="size-4" />
+          </button>
+
+          <p className="mt-4 text-center text-xs text-[#a3a3a3]">
+            Sans engagement · Réponse sous 48h · 🇨🇭 Basé à Chavornay, VD
+          </p>
+        </motion.div>
       </div>
     </section>
   );
@@ -877,7 +896,7 @@ function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "Services", href: "#services" },
-                { label: "Réalisations", href: "#realisations" },
+                { label: "Lancement", href: "#tarif-lancement" },
                 { label: "Forfaits", href: "#forfaits" },
                 { label: "À propos", href: "#apropos" },
                 { label: "FAQ", href: "#faq" },
@@ -963,7 +982,7 @@ export default function Home() {
         <Hero />
         <HeroTransition />
         <Services />
-        <Realisations />
+        <TarifLancement onSelectPlan={setSelectedPlan} />
         <Forfaits onSelectPlan={setSelectedPlan} />
         <About />
         <FAQ />
