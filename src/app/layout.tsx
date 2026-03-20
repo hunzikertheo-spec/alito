@@ -47,6 +47,9 @@ export const metadata: Metadata = {
       "Sites web professionnels pour PME et indépendants de Suisse romande. Livré en 48h, sans les prix d'agence.",
     images: ["/og-image.png"],
   },
+  verification: {
+    google: "u-5EWLYvbC2dxszC05XqmZk-qVTJubpcAG0zMlt1EOo",
+  },
   robots: {
     index: true,
     follow: true,
