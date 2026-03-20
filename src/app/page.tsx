@@ -794,8 +794,8 @@ function Contact() {
               {
                 icon: Mail,
                 label: "Email",
-                value: "theo@alito.swiss",
-                href: "mailto:theo@alito.swiss",
+                value: "alito.theo@gmail.com",
+                href: "mailto:alito.theo@gmail.com",
               },
               {
                 icon: MapPin,
@@ -934,10 +934,10 @@ function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="mailto:theo@alito.swiss"
+                  href="mailto:alito.theo@gmail.com"
                   className="text-[#737373] text-sm hover:text-white/80 transition-colors"
                 >
-                  theo@alito.swiss
+                  alito.theo@gmail.com
                 </a>
               </li>
               <li>
