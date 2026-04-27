@@ -82,7 +82,8 @@ export default function Hero() {
       </nav>
 
       {/* Corps */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 px-10 pt-14 items-start">
+      <div className="relative z-10 flex flex-col justify-center min-h-[calc(100vh-72px)] px-10">
+        <div className="grid grid-cols-[1fr_200px] gap-10 items-center w-full">
 
         {/* Colonne gauche */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -95,7 +96,7 @@ export default function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="font-playfair text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight m-0"
+            className="font-playfair text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight m-0"
           >
             On met votre<br />
             business{' '}
@@ -127,7 +128,7 @@ export default function Hero() {
 
         {/* Colonne droite — stat cards */}
         <motion.div
-          className="hidden lg:flex flex-col gap-2.5 pt-2 min-w-[175px]"
+          className="hidden lg:flex flex-col gap-2 w-[200px] flex-shrink-0"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -136,7 +137,7 @@ export default function Hero() {
             <motion.div
               key={card.num}
               variants={itemVariants}
-              className="border border-white/[0.08] rounded-xl p-4 bg-white/[0.02]"
+              className="w-full border border-white/[0.08] rounded-xl p-4 bg-white/[0.02]"
             >
               <div className="font-playfair text-[32px] font-bold text-white leading-none mb-1">
                 {card.num}
@@ -147,16 +148,15 @@ export default function Hero() {
             </motion.div>
           ))}
         </motion.div>
+        </div>
       </div>
 
       {/* Bande tech bas */}
-      <div className="relative z-10 border-t border-white/[0.06] mt-12 px-10 py-4 flex gap-8 items-center">
+      <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/[0.06] px-10 py-4 flex gap-6 items-center">
         {techStack.map((item, i) => (
-          <div key={item} className="flex items-center gap-8">
-            {i > 0 && <div className="w-px h-4 bg-white/10" />}
-            <span className="flex items-center gap-2 text-xs text-white/30 font-light tracking-wide">
-              {item}
-            </span>
+          <div key={item} className="flex items-center gap-6">
+            {i > 0 && <div className="w-px h-3 bg-white/10 flex-shrink-0" />}
+            <span className="text-[11px] text-white/30 font-light tracking-widest uppercase">{item}</span>
           </div>
         ))}
       </div>
