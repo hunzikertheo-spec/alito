@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Globe,
@@ -24,7 +24,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { LampContainer } from "@/components/ui/lamp";
+import Hero from "@/components/hero";
 
 /* ─────────────────── Helpers ─────────────────── */
 
@@ -37,133 +37,11 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ─────────────────── Header ─────────────────── */
-
-function Header() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
-        scrolled ? "border-b border-[#e5e5e5]" : ""
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="text-[#0a0a0a]">
-            <path d="M14 2L2 26h8l4-8 4 8h8L14 2z" fill="currentColor" />
-          </svg>
-          <span className="text-[#0a0a0a] font-bold tracking-wide text-sm uppercase">Alito</span>
-        </a>
-
-        {/* Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Services", href: "#services" },
-            { label: "Lancement", href: "#tarif-lancement" },
-            { label: "Forfaits", href: "#forfaits" },
-            { label: "À propos", href: "#apropos" },
-            { label: "FAQ", href: "#faq" },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-sm text-[#737373] hover:text-[#0a0a0a] transition-colors font-medium"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="rounded-full bg-[#0a0a0a] text-white px-5 py-2 text-sm font-medium hover:bg-[#262626] transition-colors"
-        >
-          Contact
-        </a>
-      </div>
-    </header>
-  );
-}
-
-/* ─────────────────── Hero ─────────────────── */
-
-function Hero() {
-  return (
-    <LampContainer className="pt-16">
-      {/* Badge */}
-      <motion.div
-        initial={{ opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
-        className="mb-6"
-      >
-        <span className="inline-flex items-center gap-2 bg-slate-800/60 border border-cyan-500/30 text-cyan-300 text-sm font-medium px-4 py-1.5 rounded-full backdrop-blur-sm">
-          🇨🇭 Basé en Suisse · Chavornay
-        </span>
-      </motion.div>
-
-      {/* Heading */}
-      <motion.h1
-        initial={{ opacity: 0.5, y: 80 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-        className="bg-gradient-to-br from-slate-100 to-slate-400 py-4 bg-clip-text text-center text-4xl font-bold tracking-tight text-transparent md:text-6xl lg:text-7xl leading-[1.1]"
-      >
-        On met votre business
-        <br />
-        en lumière.
-      </motion.h1>
-
-      {/* Subtitle */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.7, ease: "easeInOut" }}
-        className="mt-4 text-center text-slate-400 text-base md:text-lg max-w-xl leading-[1.75]"
-      >
-        Site web professionnel livré en 48h.
-        <br className="hidden sm:block" />
-        Sans les prix d&apos;agence.
-      </motion.p>
-
-      {/* CTA buttons */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.65, duration: 0.7, ease: "easeInOut" }}
-        className="mt-10 flex flex-wrap items-center justify-center gap-4"
-      >
-        <a
-          href="#forfaits"
-          className="rounded-full bg-white text-[#0a0a0a] px-7 py-3.5 text-sm font-semibold hover:bg-slate-100 transition-colors inline-flex items-center gap-2"
-        >
-          Voir nos forfaits <ArrowRight className="size-4" />
-        </a>
-        <a
-          href="#tarif-lancement"
-          className="rounded-full border border-slate-600 text-slate-300 px-7 py-3.5 text-sm font-semibold hover:border-slate-400 hover:text-white transition-colors"
-        >
-          Voir l&apos;offre de lancement
-        </a>
-      </motion.div>
-    </LampContainer>
-  );
-}
-
 /* ─────────────────── Transition Hero → contenu ─────────────────── */
 
 function HeroTransition() {
   return (
-    <div className="h-28 bg-gradient-to-b from-slate-950 to-[#f5f5f4] pointer-events-none -mt-1" />
+    <div className="h-28 bg-gradient-to-b from-[#0a0a0a] to-[#f5f5f4] pointer-events-none" />
   );
 }
 
@@ -977,7 +855,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <main>
         <Hero />
         <HeroTransition />

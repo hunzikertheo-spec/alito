@@ -1,7 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  reactStrictMode: false,
+  swcMinify: true,
+  images: { unoptimized: true },
+  experimental: {
+    optimizePackageImports: ["framer-motion", "lucide-react"],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
