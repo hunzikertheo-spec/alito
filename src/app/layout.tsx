@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Geist, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-geist",
   display: "swap",
 });
 
@@ -195,7 +195,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`min-h-full flex flex-col ${playfair.variable} ${dmSans.variable}`}>
+      <body className={`min-h-full flex flex-col ${geist.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>

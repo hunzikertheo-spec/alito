@@ -96,11 +96,11 @@ export default function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="font-playfair text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight m-0"
+            className="font-geist text-6xl font-bold text-white leading-[1.05] tracking-tight m-0"
           >
             On met votre<br />
             business{' '}
-            <em className="font-normal italic text-white/50">en lumière.</em>
+            <span className="text-white/40">en lumière.</span>
           </motion.h1>
 
           <motion.p
@@ -139,7 +139,7 @@ export default function Hero() {
               variants={itemVariants}
               className="w-full border border-white/[0.08] rounded-xl p-4 bg-white/[0.02]"
             >
-              <div className="font-playfair text-[32px] font-bold text-white leading-none mb-1">
+              <div className="font-geist text-[32px] font-bold text-white leading-none mb-1">
                 {card.num}
               </div>
               <div className="text-[11px] text-white/30 tracking-widest uppercase font-light">
@@ -150,6 +150,12 @@ export default function Hero() {
         </motion.div>
         </div>
       </div>
+
+      {/* Dégradé de transition bas hero → sections claires */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-[5]"
+        style={{ background: 'linear-gradient(to bottom, transparent 0%, #f5f5f4 100%)' }}
+      />
 
       {/* Bande tech bas */}
       <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/[0.06] px-10 py-4 flex gap-6 items-center">

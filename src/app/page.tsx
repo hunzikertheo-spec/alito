@@ -37,14 +37,6 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* ─────────────────── Transition Hero → contenu ─────────────────── */
-
-function HeroTransition() {
-  return (
-    <div className="h-28 bg-gradient-to-b from-[#0a0a0a] to-[#f5f5f4] pointer-events-none" />
-  );
-}
-
 /* ─────────────────── Services ─────────────────── */
 
 const services = [
@@ -82,7 +74,7 @@ const services = [
 
 function Services() {
   return (
-    <section id="services" className="bg-[#f5f5f4] py-24 lg:py-32">
+    <section id="services" className="bg-[#f5f5f4] pb-24 pt-32 lg:pb-32 lg:pt-40">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16">
         {/* Left */}
         <motion.div
@@ -100,7 +92,7 @@ function Services() {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
           >
             Tout ce qu&apos;il faut pour briller en ligne.
           </motion.h2>
@@ -186,7 +178,7 @@ function TarifLancement({ onSelectPlan }: { onSelectPlan: (plan: string) => void
 
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
           >
             Je cherche mes 3 premiers clients.
           </motion.h2>
@@ -346,7 +338,7 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em]"
           >
             Des prix transparents.
           </motion.h2>
@@ -440,7 +432,7 @@ function About() {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
           >
             Théo Hunziker, développeur passionné.
           </motion.h2>
@@ -551,7 +543,7 @@ function FAQ() {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] tracking-[-0.03em]"
           >
             Questions fréquentes
           </motion.h2>
@@ -606,7 +598,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
+            className="font-geist text-4xl md:text-[48px] font-bold text-[#0a0a0a] leading-[1.1] tracking-[-0.03em]"
           >
             Parlons de votre projet.
           </motion.h2>
@@ -857,7 +849,6 @@ export default function Home() {
     <>
       <main>
         <Hero />
-        <HeroTransition />
         <Services />
         <TarifLancement onSelectPlan={setSelectedPlan} />
         <Forfaits onSelectPlan={setSelectedPlan} />
