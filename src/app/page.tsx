@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Globe,
@@ -580,6 +580,38 @@ function FAQ() {
 /* ─────────────────── Contact ─────────────────── */
 
 function Contact({ selectedPlan }: { selectedPlan: string }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [forfait, setForfait] = useState(selectedPlan);
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => { setForfait(selectedPlan); }, [selectedPlan]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setStatus('idle');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, forfait, message }),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setName(''); setEmail(''); setForfait(''); setMessage('');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="bg-white py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
@@ -612,7 +644,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
           <motion.form
             variants={stagger}
             className="space-y-5"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
           >
             <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-5">
               <div>
@@ -620,6 +652,8 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
                 <input
                   type="text"
                   placeholder="Votre nom"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
                 />
               </div>
@@ -628,6 +662,8 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
                 <input
                   type="email"
                   placeholder="votre@email.ch"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
                 />
               </div>
@@ -637,8 +673,8 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
                 Forfait souhaité
               </label>
               <select
-                defaultValue={selectedPlan}
-                key={selectedPlan}
+                value={forfait}
+                onChange={(e) => setForfait(e.target.value)}
                 className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
               >
                 <option value="">Sélectionner un forfait</option>
@@ -653,16 +689,29 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
               <textarea
                 rows={5}
                 placeholder="Décrivez votre projet..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors resize-none"
               />
             </motion.div>
             <motion.div variants={fadeUp}>
               <button
                 type="submit"
-                className="rounded-full bg-[#0a0a0a] text-white px-8 py-3 text-sm font-medium hover:bg-[#262626] transition-colors inline-flex items-center gap-2"
+                disabled={isLoading}
+                className="rounded-full bg-[#0a0a0a] text-white px-8 py-3 text-sm font-medium hover:bg-[#262626] transition-colors inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Envoyer <ArrowRight className="size-4" />
+                {isLoading ? 'Envoi en cours...' : <>Envoyer <ArrowRight className="size-4" /></>}
               </button>
+              {status === 'success' && (
+                <p className="text-sm text-green-600 mt-3">
+                  Message envoyé ! Je vous recontacte sous 48h.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-red-500 mt-3">
+                  Erreur lors de l&apos;envoi. Écrivez directement à alito.theo@gmail.com
+                </p>
+              )}
             </motion.div>
           </motion.form>
         </motion.div>
