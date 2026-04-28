@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     await resend.emails.send({
-      from: 'Alito Contact <onboarding@resend.dev>',
+      from: 'Alito Contact <contact@alito.ch>',
       to: 'alito.theo@gmail.com',
       replyTo: email,
       subject: `Nouveau message de ${name} — ${forfait || 'Forfait non précisé'}`,
