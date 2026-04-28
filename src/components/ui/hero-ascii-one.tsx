@@ -44,25 +44,20 @@ export default function HeroBackground() {
     document.head.appendChild(style);
 
     const hideBranding = () => {
-      const selectors = ['[data-us-project]', '[data-us-project="OMzqyUv6M3kSnv0JeAtC"]'];
-      selectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(container => {
-          container.querySelectorAll('*').forEach(el => {
-            const text = (el.textContent || '').toLowerCase();
-            const title = (el.getAttribute('title') || '').toLowerCase();
-            const href = (el.getAttribute('href') || '').toLowerCase();
-            if (text.includes('made with') || text.includes('unicorn') || title.includes('unicorn') || href.includes('unicorn.studio')) {
-              (el as HTMLElement).style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;position:absolute!important;left:-9999px!important;top:-9999px!important';
-              try { el.remove(); } catch(e) {}
-            }
-          });
+      const projectDiv = document.querySelector('[data-us-project]');
+      if (projectDiv) {
+        projectDiv.querySelectorAll('*').forEach(el => {
+          const text = (el.textContent || '').toLowerCase();
+          if (text.includes('made with') || text.includes('unicorn')) {
+            try { el.remove(); } catch(e) {}
+          }
         });
-      });
+      }
     };
 
     hideBranding();
-    const interval = setInterval(hideBranding, 50);
-    [500, 1000, 2000, 5000].forEach(t => setTimeout(hideBranding, t));
+    const interval = setInterval(hideBranding, 100);
+    [1000, 3000, 5000].forEach(t => setTimeout(hideBranding, t));
 
     return () => {
       clearInterval(interval);
@@ -74,7 +69,7 @@ export default function HeroBackground() {
   return (
     <div className="absolute inset-0 w-full h-full hidden lg:block">
       <div
-        data-us-project="OMzqyUv6M3kSnv0JeAtC"
+        data-us-project="whwOGlfJ5Rz2rHaEUgHl"
         style={{ width: '100%', height: '100%', minHeight: '100vh' }}
       />
     </div>
