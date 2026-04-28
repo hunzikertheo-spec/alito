@@ -63,70 +63,63 @@ export default function Hero() {
       </nav>
 
       {/* Corps */}
-      <div className="relative z-10 w-full" style={{ minHeight: 'calc(100vh - 72px)' }}>
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full px-10 grid grid-cols-[1fr_240px] gap-8 items-center">
+      <div
+        className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-16 items-center px-12"
+        style={{ minHeight: 'calc(100vh - 72px - 56px)' }}
+      >
+        {/* Colonne gauche — texte */}
+        <div className="flex flex-col max-w-lg">
+          <span className="border border-white/20 rounded-full px-4 py-1.5 text-[11px] text-white/60 tracking-widest uppercase inline-flex items-center gap-2 mb-8 w-fit">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+            Basé en Suisse · Chavornay
+          </span>
 
-            {/* Colonne texte — centrée horizontalement sur la page */}
-            <div className="flex flex-col max-w-xl mx-auto">
-              <span className="border border-white/20 rounded-full px-4 py-1.5 text-[11px] text-white/60 tracking-widest uppercase inline-flex items-center gap-2 mb-8 w-fit">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
-                Basé en Suisse · Chavornay
-              </span>
+          <h1 className="text-6xl font-bold text-white leading-[1.05] tracking-tight mb-5">
+            On met votre<br />
+            business{' '}
+            <span className="text-white/45">en lumière.</span>
+          </h1>
 
-              <h1
-                className="text-6xl font-bold text-white leading-[1.05] tracking-tight mb-5"
-              >
-                On met votre<br />
-                business{' '}
-                <span className="text-white/50">en lumière.</span>
-              </h1>
+          <p className="text-base text-white/60 font-light leading-relaxed mb-8">
+            Site web professionnel livré en 48h.<br />
+            Sans les prix d&apos;agence.
+          </p>
 
-              <p className="text-base text-white/60 font-light leading-relaxed mb-8 max-w-sm">
-                Site web professionnel livré en 48h.<br />
-                Sans les prix d&apos;agence.
-              </p>
+          <div className="flex gap-3 items-center">
+            <a
+              href="#forfaits"
+              className="bg-white text-[#0a0a0a] rounded-full px-6 py-3 text-sm font-semibold inline-flex items-center gap-1.5 no-underline hover:bg-white/90 transition-colors"
+            >
+              Voir nos forfaits →
+            </a>
+            <a
+              href="#lancement"
+              className="border border-white/30 text-white/80 rounded-full px-6 py-3 text-sm font-light no-underline hover:border-white/50 transition-colors"
+            >
+              Offre de lancement
+            </a>
+          </div>
+        </div>
 
-              <div className="flex gap-3 items-center">
-                <a
-                  href="#forfaits"
-                  className="bg-white text-[#0a0a0a] rounded-full px-6 py-3 text-sm font-semibold flex items-center gap-1.5 no-underline hover:bg-white/90 transition-colors"
-                >
-                  Voir nos forfaits →
-                </a>
-                <a
-                  href="#lancement"
-                  className="border border-white/30 text-white/80 rounded-full px-6 py-3 text-sm font-light no-underline hover:border-white/50 transition-colors"
-                >
-                  Offre de lancement
-                </a>
+        {/* Colonne droite — stat cards */}
+        <div className="hidden lg:flex flex-col gap-2.5">
+          {[
+            { num: '48h', label: 'Délai de livraison' },
+            { num: 'CHF', label: 'Prix transparents' },
+            { num: '01', label: 'Interlocuteur unique' },
+          ].map((card) => (
+            <div
+              key={card.num}
+              className="border border-white/10 rounded-xl p-4 bg-white/[0.04] backdrop-blur-sm"
+            >
+              <div className="text-[32px] font-bold text-white leading-none mb-1">
+                {card.num}
+              </div>
+              <div className="text-[11px] text-white/40 tracking-widest uppercase font-light">
+                {card.label}
               </div>
             </div>
-
-            {/* Colonne stat cards */}
-            <div className="hidden lg:flex flex-col gap-2.5">
-              {[
-                { num: '48h', label: 'Délai de livraison' },
-                { num: 'CHF', label: 'Prix transparents' },
-                { num: '01', label: 'Interlocuteur unique' },
-              ].map((card) => (
-                <div
-                  key={card.num}
-                  className="border border-white/10 rounded-xl p-4 bg-white/[0.04] backdrop-blur-sm"
-                >
-                  <div
-                    className="text-[32px] font-bold text-white leading-none mb-1"
-                  >
-                    {card.num}
-                  </div>
-                  <div className="text-[11px] text-white/40 tracking-widest uppercase font-light">
-                    {card.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-          </div>
+          ))}
         </div>
       </div>
 
