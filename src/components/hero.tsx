@@ -1,25 +1,6 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
 import HeroBackground from '@/components/ui/hero-ascii-one';
-
-const statCards = [
-  { num: '48h', label: 'Délai de livraison' },
-  { num: 'CHF', label: 'Prix transparents' },
-  { num: '01', label: 'Interlocuteur unique' },
-];
-
-const techStack = ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Vercel · Suisse'];
-
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
 
 export default function Hero() {
   return (
@@ -82,90 +63,90 @@ export default function Hero() {
       </nav>
 
       {/* Corps */}
-      <div className="relative z-10 flex flex-col justify-center min-h-[calc(100vh-72px)] px-10">
-        <div className="grid grid-cols-[1fr_200px] gap-10 items-center w-full">
+      <div className="relative z-10 w-full" style={{ minHeight: 'calc(100vh - 72px)' }}>
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full px-10 grid grid-cols-[1fr_240px] gap-8 items-center">
 
-        {/* Colonne gauche */}
-        <motion.div variants={containerVariants} initial="hidden" animate="visible">
-          <motion.div variants={itemVariants}>
-            <span className="border border-white/15 rounded-full px-4 py-1 text-[11px] text-white/50 tracking-widest uppercase inline-flex items-center gap-2 mb-7">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
-              Basé en Suisse · Chavornay
-            </span>
-          </motion.div>
+            {/* Colonne texte — centrée horizontalement sur la page */}
+            <div className="flex flex-col max-w-xl mx-auto">
+              <span className="border border-white/20 rounded-full px-4 py-1.5 text-[11px] text-white/60 tracking-widest uppercase inline-flex items-center gap-2 mb-8 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                Basé en Suisse · Chavornay
+              </span>
 
-          <motion.h1
-            variants={itemVariants}
-            className="font-geist text-6xl font-bold text-white leading-[1.05] tracking-tight m-0"
-          >
-            On met votre<br />
-            business{' '}
-            <span className="text-white/40">en lumière.</span>
-          </motion.h1>
+              <h1
+                className="text-6xl font-bold text-white leading-[1.05] tracking-tight mb-5"
+                style={{ fontFamily: 'var(--font-geist)' }}
+              >
+                On met votre<br />
+                business{' '}
+                <span className="text-white/50">en lumière.</span>
+              </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-sm text-white/40 font-light leading-relaxed mt-5 mb-9 max-w-sm"
-          >
-            Site web professionnel livré en 48h.<br />Sans les prix d&apos;agence.
-          </motion.p>
+              <p className="text-base text-white/60 font-light leading-relaxed mb-8 max-w-sm">
+                Site web professionnel livré en 48h.<br />
+                Sans les prix d&apos;agence.
+              </p>
 
-          <motion.div variants={itemVariants} className="flex gap-3 items-center flex-wrap">
-            <a
-              href="#forfaits"
-              className="bg-white text-[#0a0a0a] rounded-full px-6 py-3 text-sm font-medium flex items-center gap-1.5 no-underline"
-            >
-              Voir nos forfaits →
-            </a>
-            <a
-              href="#tarif-lancement"
-              className="border border-white/15 text-white/50 rounded-full px-6 py-3 text-sm font-light no-underline"
-            >
-              Offre de lancement
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* Colonne droite — stat cards */}
-        <motion.div
-          className="hidden lg:flex flex-col gap-2 w-[200px] flex-shrink-0"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {statCards.map((card) => (
-            <motion.div
-              key={card.num}
-              variants={itemVariants}
-              className="w-full border border-white/[0.08] rounded-xl p-4 bg-white/[0.02]"
-            >
-              <div className="font-geist text-[32px] font-bold text-white leading-none mb-1">
-                {card.num}
+              <div className="flex gap-3 items-center">
+                <a
+                  href="#forfaits"
+                  className="bg-white text-[#0a0a0a] rounded-full px-6 py-3 text-sm font-semibold flex items-center gap-1.5 no-underline hover:bg-white/90 transition-colors"
+                >
+                  Voir nos forfaits →
+                </a>
+                <a
+                  href="#lancement"
+                  className="border border-white/30 text-white/80 rounded-full px-6 py-3 text-sm font-light no-underline hover:border-white/50 transition-colors"
+                >
+                  Offre de lancement
+                </a>
               </div>
-              <div className="text-[11px] text-white/30 tracking-widest uppercase font-light">
-                {card.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+
+            {/* Colonne stat cards */}
+            <div className="hidden lg:flex flex-col gap-2.5">
+              {[
+                { num: '48h', label: 'Délai de livraison' },
+                { num: 'CHF', label: 'Prix transparents' },
+                { num: '01', label: 'Interlocuteur unique' },
+              ].map((card) => (
+                <div
+                  key={card.num}
+                  className="border border-white/10 rounded-xl p-4 bg-white/[0.04] backdrop-blur-sm"
+                >
+                  <div
+                    className="text-[32px] font-bold text-white leading-none mb-1"
+                    style={{ fontFamily: 'var(--font-geist)' }}
+                  >
+                    {card.num}
+                  </div>
+                  <div className="text-[11px] text-white/40 tracking-widest uppercase font-light">
+                    {card.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
+      </div>
+
+      {/* Bande tech bas */}
+      <div className="relative z-10 border-t border-white/[0.08] px-10 py-4 flex gap-8 items-center">
+        {['Next.js', 'Tailwind CSS', 'Framer Motion', 'Vercel · Suisse'].map((item, i) => (
+          <div key={item} className="flex items-center gap-8">
+            {i > 0 && <div className="w-px h-3 bg-white/10 flex-shrink-0" />}
+            <span className="text-[11px] text-white/35 font-light tracking-widest uppercase">{item}</span>
+          </div>
+        ))}
       </div>
 
       {/* Dégradé de transition bas hero → sections claires */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-[5]"
-        style={{ background: 'linear-gradient(to bottom, transparent 0%, #f5f5f4 100%)' }}
+        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-20"
+        style={{ background: 'linear-gradient(to bottom, transparent 0%, #f4f4f5 100%)' }}
       />
-
-      {/* Bande tech bas */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/[0.06] px-10 py-4 flex gap-6 items-center">
-        {techStack.map((item, i) => (
-          <div key={item} className="flex items-center gap-6">
-            {i > 0 && <div className="w-px h-3 bg-white/10 flex-shrink-0" />}
-            <span className="text-[11px] text-white/30 font-light tracking-widest uppercase">{item}</span>
-          </div>
-        ))}
-      </div>
 
     </section>
   );
