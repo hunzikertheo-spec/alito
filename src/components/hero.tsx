@@ -36,11 +36,11 @@ export default function Hero() {
 
       {/* Navigation */}
       <nav className="relative z-10 flex items-center justify-between px-10 h-[72px]">
-        <div className="flex items-center gap-2 text-white font-medium text-sm tracking-widest">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2L18 16H2L10 2Z" fill="white" opacity="0.9" />
+        <div className="flex items-center gap-2.5">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2L19 18H1L10 2Z" fill="white"/>
           </svg>
-          ALITO
+          <span className="text-white font-semibold text-base tracking-wide">ALITO</span>
         </div>
         <ul className="hidden md:flex gap-8 list-none m-0 p-0">
           {['Services', 'Lancement', 'Forfaits', 'À propos', 'FAQ'].map((item) => (
