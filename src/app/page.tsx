@@ -86,7 +86,7 @@ function Services() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+            className="text-neutral-400 font-medium text-[11px] tracking-widest uppercase mb-4"
           >
             Services
           </motion.p>
@@ -120,7 +120,7 @@ function Services() {
               className="bg-white rounded-2xl p-8 border border-[#e5e5e5] hover:border-[#d4d4d4] hover:shadow-md transition-all group"
             >
               <div className="flex items-start gap-5">
-                <div className="flex-shrink-0 size-12 rounded-xl bg-[#eff6ff] flex items-center justify-center text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white transition-colors">
+                <div className="flex-shrink-0 size-12 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-700 group-hover:bg-[#0a0a0a] group-hover:text-white transition-colors">
                   <service.icon className="size-6" />
                 </div>
                 <div>
@@ -332,7 +332,7 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
         >
           <motion.p
             variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+            className="text-neutral-400 font-medium text-[11px] tracking-widest uppercase mb-4"
           >
             Forfaits
           </motion.p>
@@ -362,11 +362,11 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
               key={plan.name}
               variants={fadeUp}
               className={`relative rounded-2xl border-2 p-8 flex flex-col bg-white border-[#e5e5e5] ${
-                plan.accent ? "border-t-[#2563eb] border-t-4" : ""
+                plan.accent ? "border-t-[#0a0a0a] border-t-4" : ""
               }`}
             >
               {plan.popular && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#2563eb] text-white text-[11px] font-medium tracking-[0.05em] uppercase px-4 py-1 rounded-full">
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#0a0a0a] text-white text-[11px] font-medium tracking-widest uppercase px-4 py-1 rounded-full">
                   Populaire
                 </span>
               )}
@@ -382,7 +382,7 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
                   <li key={feature} className="flex items-start gap-3 text-sm text-[#737373]">
                     <CheckCircle
                       className={`size-4 flex-shrink-0 mt-0.5 ${
-                        plan.accent ? "text-[#2563eb]" : "text-[#0a0a0a]"
+                        "text-[#0a0a0a]"
                       }`}
                     />
                     {feature}
@@ -397,7 +397,7 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
                 }}
                 className={`rounded-full py-3 text-sm font-medium text-center transition-colors w-full cursor-pointer ${
                   plan.accent
-                    ? "bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
+                    ? "bg-[#0a0a0a] text-white hover:bg-neutral-800"
                     : "bg-[#f5f5f4] text-[#0a0a0a] hover:bg-[#e5e5e5]"
                 }`}
               >
@@ -426,7 +426,7 @@ function About() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+            className="text-neutral-400 font-medium text-[11px] tracking-widest uppercase mb-4"
           >
             À propos
           </motion.p>
@@ -474,7 +474,7 @@ function About() {
               variants={fadeUp}
               className="bg-[#f5f5f4] border border-[#e5e5e5] rounded-2xl px-8 py-6 flex items-center gap-5"
             >
-              <div className="flex-shrink-0 size-12 rounded-xl bg-white flex items-center justify-center text-[#2563eb] border border-[#e5e5e5]">
+              <div className="flex-shrink-0 size-12 rounded-xl bg-white flex items-center justify-center text-neutral-700 border border-[#e5e5e5]">
                 <item.icon className="size-6" />
               </div>
               <div>
@@ -537,7 +537,7 @@ function FAQ() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+            className="text-neutral-400 font-medium text-[11px] tracking-widest uppercase mb-4"
           >
             FAQ
           </motion.p>
@@ -592,7 +592,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
         >
           <motion.p
             variants={fadeUp}
-            className="text-[#2563eb] font-medium text-[11px] tracking-[0.1em] uppercase mb-4"
+            className="text-neutral-400 font-medium text-[11px] tracking-widest uppercase mb-4"
           >
             Contact
           </motion.p>
