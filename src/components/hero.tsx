@@ -38,7 +38,7 @@ export default function Hero() {
       <nav className="relative z-10 flex items-center justify-between px-10 h-[72px]">
         <div className="flex items-center gap-2.5">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2L19 18H1L10 2Z" fill="white" />
+            <path d="M10 2L19 18H14L10 12L6 18H1Z" fill="white" />
           </svg>
           <span className="text-white font-semibold text-base tracking-wide">ALITO</span>
         </div>
