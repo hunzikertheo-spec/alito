@@ -72,7 +72,7 @@ export default function HeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-y-0 right-0 w-[60%] h-full hidden lg:block">
+    <div className="absolute inset-0 w-full h-full hidden lg:block">
       <div
         data-us-project="OMzqyUv6M3kSnv0JeAtC"
         style={{ width: '100%', height: '100%', minHeight: '100vh' }}
