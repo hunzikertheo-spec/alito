@@ -76,7 +76,6 @@ export default function Hero() {
 
               <h1
                 className="text-6xl font-bold text-white leading-[1.05] tracking-tight mb-5"
-                style={{ fontFamily: 'var(--font-geist)' }}
               >
                 On met votre<br />
                 business{' '}
@@ -117,7 +116,6 @@ export default function Hero() {
                 >
                   <div
                     className="text-[32px] font-bold text-white leading-none mb-1"
-                    style={{ fontFamily: 'var(--font-geist)' }}
                   >
                     {card.num}
                   </div>
@@ -133,11 +131,18 @@ export default function Hero() {
       </div>
 
       {/* Bande tech bas */}
-      <div className="relative z-10 border-t border-white/[0.08] px-10 py-4 flex gap-8 items-center">
-        {['Next.js', 'Tailwind CSS', 'Framer Motion', 'Vercel · Suisse'].map((item, i) => (
-          <div key={item} className="flex items-center gap-8">
-            {i > 0 && <div className="w-px h-3 bg-white/10 flex-shrink-0" />}
-            <span className="text-[11px] text-white/35 font-light tracking-widest uppercase">{item}</span>
+      <div className="relative z-30 border-t border-white/10 px-10 py-5 flex items-center gap-3 flex-wrap">
+        {[
+          { label: 'Next.js' },
+          { label: 'Tailwind CSS' },
+          { label: 'Framer Motion' },
+          { label: 'Vercel · Suisse' },
+        ].map((item, i) => (
+          <div key={item.label} className="flex items-center gap-3">
+            {i > 0 && <div className="w-px h-3 bg-white/20 flex-shrink-0" />}
+            <span className="text-xs text-white/70 font-medium tracking-wide">
+              {item.label}
+            </span>
           </div>
         ))}
       </div>

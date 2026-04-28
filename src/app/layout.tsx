@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, DM_Sans } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["300", "400", "500"],
+  variable: "--font-space",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -195,7 +189,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`min-h-full flex flex-col ${geist.variable} ${dmSans.variable}`}>
+      <body className={`min-h-full flex flex-col font-sans antialiased ${spaceGrotesk.variable}`}>
         {children}
       </body>
     </html>
