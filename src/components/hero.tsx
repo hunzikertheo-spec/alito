@@ -64,7 +64,7 @@ export default function Hero() {
 
       {/* Corps */}
       <div
-        className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-16 items-center px-12"
+        className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-16 items-center pl-16 pr-8"
         style={{ minHeight: 'calc(100vh - 72px - 56px)' }}
       >
         {/* Colonne gauche — texte */}
@@ -74,9 +74,8 @@ export default function Hero() {
             Basé en Suisse · Chavornay
           </span>
 
-          <h1 className="text-6xl font-bold text-white leading-[1.05] tracking-tight mb-5">
-            On met votre<br />
-            business{' '}
+          <h1 className="text-5xl font-bold text-white leading-[1.1] tracking-tight mb-5">
+            On met votre business<br />
             <span className="text-white/45">en lumière.</span>
           </h1>
 
@@ -133,7 +132,7 @@ export default function Hero() {
         ].map((item, i) => (
           <div key={item.label} className="flex items-center gap-3">
             {i > 0 && <div className="w-px h-3 bg-white/20 flex-shrink-0" />}
-            <span className="text-xs text-white/70 font-medium tracking-wide">
+            <span className="text-xs text-white/80 font-medium tracking-wide">
               {item.label}
             </span>
           </div>
