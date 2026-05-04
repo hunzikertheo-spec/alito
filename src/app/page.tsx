@@ -641,8 +641,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
             Remplissez le formulaire et je vous recontacte sous 48h.
           </motion.p>
 
-          <motion.form
-            variants={stagger}
+          <form
             className="space-y-5"
             onSubmit={handleSubmit}
           >
@@ -713,7 +712,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
                 </p>
               )}
             </motion.div>
-          </motion.form>
+          </form>
         </motion.div>
 
         {/* Right — Info */}
