@@ -648,86 +648,93 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
             Remplissez le formulaire et je vous recontacte sous 48h.
           </motion.p>
 
-          <form
-            className="space-y-5"
-            onSubmit={handleSubmit}
-          >
-            <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Nom</label>
-                <input
-                  type="text"
-                  placeholder="Votre nom"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
-                />
+          {status === 'success' ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <div className="flex items-center justify-center size-20 rounded-full bg-green-100 mb-6">
+                <CheckCircle className="size-10 text-green-600" />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Email</label>
-                <input
-                  type="email"
-                  placeholder="votre@email.ch"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
-                />
-              </div>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
-                Forfait souhaité
-              </label>
-              <select
-                value={forfait}
-                onChange={(e) => setForfait(e.target.value)}
-                className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
-              >
-                <option value="">Sélectionner un forfait</option>
-                <option value="essentiel">Essentiel — 900 CHF</option>
-                <option value="standard">Standard — 1&apos;600 CHF</option>
-                <option value="pro">Pro — 2&apos;800 CHF</option>
-                <option value="custom">Sur mesure</option>
-              </select>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Message</label>
-              <textarea
-                rows={5}
-                placeholder="Décrivez votre projet..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors resize-none"
-              />
-            </motion.div>
-            <motion.div variants={fadeUp}>
+              <h3 className="text-2xl font-bold text-[#0a0a0a] mb-3">Message envoyé !</h3>
+              <p className="text-[#737373] text-base leading-[1.7] max-w-xs">
+                Merci, je vous recontacte sous 48h.
+              </p>
               <button
-                type="submit"
-                disabled={isLoading}
-                className="rounded-full bg-[#0a0a0a] text-white px-8 py-3 text-sm font-medium hover:bg-[#262626] transition-colors inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                onClick={() => setStatus('idle')}
+                className="mt-8 text-sm text-[#a3a3a3] underline underline-offset-4 hover:text-[#737373] transition-colors"
               >
-                {isLoading ? 'Envoi en cours...' : <>Envoyer <ArrowRight className="size-4" /></>}
+                Envoyer un autre message
               </button>
-            </motion.div>
-            {status !== 'idle' && (
-              <div ref={statusRef}>
-                {status === 'success' && (
-                  <div className="p-4 rounded-xl bg-green-50 border border-green-200">
-                    <p className="text-sm text-green-700 font-medium">
-                      ✓ Message envoyé ! Je vous recontacte sous 48h.
-                    </p>
-                  </div>
-                )}
+            </div>
+          ) : (
+            <form
+              className="space-y-5"
+              onSubmit={handleSubmit}
+            >
+              <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Nom</label>
+                  <input
+                    type="text"
+                    placeholder="Votre nom"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Email</label>
+                  <input
+                    type="email"
+                    placeholder="votre@email.ch"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+                  />
+                </div>
+              </motion.div>
+              <motion.div variants={fadeUp}>
+                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">
+                  Forfait souhaité
+                </label>
+                <select
+                  value={forfait}
+                  onChange={(e) => setForfait(e.target.value)}
+                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors"
+                >
+                  <option value="">Sélectionner un forfait</option>
+                  <option value="essentiel">Essentiel — 900 CHF</option>
+                  <option value="standard">Standard — 1&apos;600 CHF</option>
+                  <option value="pro">Pro — 2&apos;800 CHF</option>
+                  <option value="custom">Sur mesure</option>
+                </select>
+              </motion.div>
+              <motion.div variants={fadeUp}>
+                <label className="block text-sm font-medium text-[#0a0a0a] mb-2">Message</label>
+                <textarea
+                  rows={5}
+                  placeholder="Décrivez votre projet..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f4] px-4 py-3 text-sm text-[#0a0a0a] placeholder:text-[#a3a3a3] focus:outline-none focus:ring-2 focus:ring-[#0a0a0a]/10 focus:border-[#d4d4d4] transition-colors resize-none"
+                />
+              </motion.div>
+              <motion.div variants={fadeUp}>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="rounded-full bg-[#0a0a0a] text-white px-8 py-3 text-sm font-medium hover:bg-[#262626] transition-colors inline-flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Envoi en cours...' : <>Envoyer <ArrowRight className="size-4" /></>}
+                </button>
                 {status === 'error' && (
-                  <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                  <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
                     <p className="text-sm text-red-600 font-medium">
                       Une erreur est survenue. Écrivez directement à alito.theo@gmail.com
                     </p>
                   </div>
                 )}
-              </div>
-            )}
-          </form>
+              </motion.div>
+            </form>
+          )}
         </motion.div>
 
         {/* Right — Info */}
