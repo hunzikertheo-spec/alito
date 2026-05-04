@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Globe,
@@ -589,6 +589,13 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
 
   useEffect(() => { setForfait(selectedPlan); }, [selectedPlan]);
 
+  const statusRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (status !== 'idle') {
+      statusRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [status]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -602,9 +609,6 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
       if (res.ok) {
         setStatus('success');
         setName(''); setEmail(''); setForfait(''); setMessage('');
-        setTimeout(() => {
-          document.getElementById('contact-status')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
       } else {
         setStatus('error');
       }
@@ -704,21 +708,25 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
               >
                 {isLoading ? 'Envoi en cours...' : <>Envoyer <ArrowRight className="size-4" /></>}
               </button>
-              {status === 'success' && (
-                <div id="contact-status" className="mt-4 p-4 rounded-xl bg-green-50 border border-green-200">
-                  <p className="text-sm text-green-700 font-medium">
-                    ✓ Message envoyé ! Je vous recontacte sous 48h.
-                  </p>
-                </div>
-              )}
-              {status === 'error' && (
-                <div id="contact-status" className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
-                  <p className="text-sm text-red-600 font-medium">
-                    Une erreur est survenue. Écrivez directement à alito.theo@gmail.com
-                  </p>
-                </div>
-              )}
             </motion.div>
+            {status !== 'idle' && (
+              <div ref={statusRef}>
+                {status === 'success' && (
+                  <div className="p-4 rounded-xl bg-green-50 border border-green-200">
+                    <p className="text-sm text-green-700 font-medium">
+                      ✓ Message envoyé ! Je vous recontacte sous 48h.
+                    </p>
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                    <p className="text-sm text-red-600 font-medium">
+                      Une erreur est survenue. Écrivez directement à alito.theo@gmail.com
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </form>
         </motion.div>
 
