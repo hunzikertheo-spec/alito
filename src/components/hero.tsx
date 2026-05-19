@@ -104,7 +104,7 @@ export default function Hero() {
         <div className="hidden lg:flex flex-col gap-2.5">
           {[
             { num: '48h', label: 'Délai de livraison' },
-            { num: 'CHF', label: 'Prix transparents' },
+            { num: '100%', label: 'Prix en CHF' },
             { num: '01', label: 'Interlocuteur unique' },
           ].map((card) => (
             <div

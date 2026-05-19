@@ -154,7 +154,7 @@ const PLACES_LEFT = 2;
 function TarifLancement({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
   return (
     <section
-      id="tarif-lancement"
+      id="lancement"
       className="py-24 lg:py-32 bg-gradient-to-br from-amber-50 via-white to-orange-50 relative overflow-hidden"
     >
       {/* Subtle texture rings */}
@@ -415,7 +415,7 @@ function Forfaits({ onSelectPlan }: { onSelectPlan: (plan: string) => void }) {
 
 function About() {
   return (
-    <section id="apropos" className="bg-white py-24 lg:py-32">
+    <section id="propos" className="bg-white py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         {/* Left — Text */}
         <motion.div
@@ -790,7 +790,7 @@ function Contact({ selectedPlan }: { selectedPlan: string }) {
           {/* Trust badges */}
           <motion.div variants={fadeUp} className="mt-12 grid grid-cols-2 gap-4">
             {[
-              { icon: Shield, text: "Données hébergées en Suisse" },
+              { icon: Shield, text: "Infrastructure européenne" },
               { icon: Headphones, text: "Support réactif" },
               { icon: Code, text: "Code propre & maintenable" },
               { icon: BarChart3, text: "Analytics inclus" },
@@ -836,9 +836,9 @@ function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "Services", href: "#services" },
-                { label: "Lancement", href: "#tarif-lancement" },
+                { label: "Lancement", href: "#lancement" },
                 { label: "Forfaits", href: "#forfaits" },
-                { label: "À propos", href: "#apropos" },
+                { label: "À propos", href: "#propos" },
                 { label: "FAQ", href: "#faq" },
                 { label: "Contact", href: "#contact" },
               ].map((item) => (
@@ -861,7 +861,7 @@ function Footer() {
               {[
                 "Sites Vitrines",
                 "Optimisation SEO",
-                "Performance Web",
+                "Performance & Vitesse",
                 "Maintenance & Support",
                 "Consulting Digital",
               ].map((item) => (
@@ -894,7 +894,7 @@ function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-[#737373] text-sm">
-            © 2025 Alito — Théo Hunziker. Tous droits réservés.
+            © 2026 Alito — Théo Hunziker. Tous droits réservés.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-[#737373] text-sm hover:text-white/80 transition-colors">
